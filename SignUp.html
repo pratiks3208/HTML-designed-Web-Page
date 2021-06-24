@@ -1,0 +1,232 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Explore Joy :: Sign Up</title>
+    <link href="{% static 'css/login/Style.css' %}" rel="stylesheet" />
+
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="{% static 'js/login/jquery.mobile.custom.min.js' %}"></script>
+    <script src="{% static 'js/login/jquery-slider-min.js' %}"></script>
+    <script src="{% static 'js/login/register-student.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login/SignUp.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+        .custom-select{
+            position:relative;
+            font-family: Arial;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="main">
+            <div class="row ">
+                <div class="col-lg-4 col-sm-12 col-md-12">
+                    <div class="row  back-form">
+                        <div class="col-lg-12  col-md-12 form-inner">
+                            <div class="logo">
+                                <img class="img-responsive " src="{% static 'assets/login/Img/XploreJoy.png' %}" height="45px" width="auto" />
+                            </div>
+                            <div class="heading">
+                                <h1 class="">Student Sign up</h1>
+                            </div>
+
+                            <form method="post" onsubmit="return registerStudentSubmit()">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label class="form-label"> Name </label>
+                                    <input
+                                            type="text"
+                                            class="form-control txt"
+                                            placeholder="Enter Name"
+                                            name="{{ form.full_name.name }}"
+                                            id="{{ form.full_name.id_for_label }}"
+                                            value="{{ form.full_name.value|default_if_none:'' }}"
+                                    >
+                                <p class="common-validation-error">{{ form.full_name.errors.as_text }}</p>
+
+                                </div>
+                                    <div class="form-group">
+                                            <label class="form-label"> Gender </label>
+                                            <!-- <input type="text" class="form-control txt" placeholder="">-->
+                                                <select
+                                                        class="form-control Dd txt"
+                                                        name="{{ form.gender.name }}"
+                                                        id="{{ form.gender.id_for_label }}"
+                                                        value="{{ form.gender.value|default_if_none:'' }}"
+                                                >
+                                                    {% for val in form.gender %}
+                                                        {{val}}
+                                                    {% endfor %}
+                                                </select>
+                                        
+                                            <label> Age </label> 
+                                            <!-- <div class="wrap"> -->
+                                                <select class="form-control Dd txt">
+                                                    {% with ''|center:100 as range %}
+                                                        {% for i in range %}
+                                                            <option value="{{ forloop.counter }}">{{ forloop.counter }}</option>
+                                                        {% endfor %}
+                                                                  {% with ''|center:100 as range %}
+                                                        {% for i in range %}    
+                                                        {% endfor %}
+                                                    {% endwith %}
+                                                {% endwith %}
+                                                </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label"> Email </label>
+                                    <input
+                                        type="email"
+                                        class="form-control txt"
+                                        placeholder="Enter Email"
+                                        name="{{ form.email.name }}"
+                                        id="{{ form.email.id_for_label }}"
+                                        value="{{ form.email.value|default_if_none:'' }}"
+                                    >
+                                <p class="common-validation-error">{{ form.email.errors.as_text }}</p>
+                                </div>
+                                <input
+                                    type="hidden"
+                                    class="form-control txt"
+                                    placeholder=""
+                                    name="{{ form.country_code.name }}"
+                                    id="{{ form.country_code.id_for_label }}"
+                                    value="{{ form.country_code.value|default_if_none:'' }}"
+                                >
+
+                                <div class="form-group">
+                                    <label class="form-label"> Mobile </label>
+                                    <input
+                                            type="text"
+                                            class="form-control txt"
+                                            placeholder="Enter Mobile"
+                                            name="{{ form.mobile.name }}"
+                                            id="{{ form.mobile.id_for_label }}"
+                                            value="{{ form.mobile.value|default_if_none:'' }}"
+                                    >
+                                <p class="common-validation-error">{{ form.mobile.errors.as_text }}</p>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label"> Password </label>
+                                    <input
+                                            type="password"
+                                            class="form-control txt"
+                                            placeholder="Enter Password"
+                                            name="{{ form.password1.name }}"
+                                            id="{{ form.password1.id_for_label }}"
+                                            value="{{ form.password1.value|default_if_none:'' }}"
+                                    >
+                                <p class="common-validation-error">{{ form.password2.errors.as_text }}</p>
+                                </div>
+                                <input
+                                        type="hidden"
+                                        class="form-control txt"
+                                        placeholder=""
+                                        name="{{ form.password2.name }}"
+                                        id="{{ form.password2.id_for_label }}"
+                                        value="{{ form.password2.value|default_if_none:'' }}"
+                                >
+                                <div class="form-group">
+                                    <label class="form-label"> Interests </label>
+                                    <select
+                                            class="form-control Dd txt"
+                                            name="{{ form.interests.name }}"
+                                            id="{{ form.interests.id_for_label }}"
+                                            value="{{ form.interests.value|default_if_none:'' }}"
+                                    >
+                                        {% for interest in form.interests %}
+                                            {{interest}}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label"> What do you do ? </label>
+                                    <select
+                                            class="form-control Dd txt"
+                                            name="{{ form.profession.name }}"
+                                            id="{{ form.profession.id_for_label }}"
+                                            value="{{ form.profession.value|default_if_none:'' }}"
+                                    >
+                                        {% for prof in form.profession %}
+                                            {{prof}}
+                                        {% endfor %}
+                                    </select>
+
+                                </div>
+                                <a class="last"><input
+                                        type="checkbox"
+                                        name="{{ form.can_receive_sms.name }}"
+                                        id="{{ form.can_receive_sms.id_for_label }}"
+                                >I agree to recieve SMS</a>
+                                <p class="common-validation-error">{{ form.can_receive_sms.errors.as_text }}</p>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-primary submit" value="Register" />
+                                </div>
+                                <p class="common-validation-error">{{ form.non_field_errors.as_text }}</p>
+                                <div class="form-group link">
+                                    <a href="/login" class="anchor">I already have an Account</a>
+                                </div>
+                                <div class="form-group link">
+                                    <a href="/teacher/register-teacher" class="btn btn-primary btn-teacher btn-mob">I am a Teacher</a>
+                                </div>
+                            </form>
+                            </div>
+                            <!-- <div class="col-lg-1  col-md-1"></div> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-8  col-md-8 ">
+                        <div class="row right-side-content">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">
+                                <div class="sign-detail-right">
+                                    <h1>
+                                        Welcome To XploreJoy!
+                                    </h1>
+
+                                    <h3>
+                                        Explore your Hobbies and
+                                        make joyful life.
+                                    </h3>
+                                    <a href="/teacher/register-teacher" class="btn btn-primary btn-teacher">I am a Teacher</a>
+                                </div>
+                            </div>
+                            <div class="col-md-3"></div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
